@@ -1,0 +1,25 @@
+GENERATIVE AI AND LARGE LANGUAGE MODELS - INTERVIEW KNOWLEDGE BASE
+
+Transformer Architecture
+The Transformer, introduced in "Attention Is All You Need" (2017), replaced recurrence with self-attention, allowing parallel processing of sequence tokens. Self-attention computes, for each token, weighted relationships (query, key, value vectors) to every other token, capturing long-range dependencies more effectively than RNNs. Multi-head attention runs several attention computations in parallel subspaces, letting the model attend to different types of relationships simultaneously. Positional encodings inject sequence order information since attention itself is order-agnostic.
+
+Large Language Models (LLMs)
+LLMs like GPT, Gemini, and Claude are trained on massive text corpora to predict the next token, then further refined via instruction tuning and reinforcement learning from human feedback (RLHF) or similar preference-optimization techniques to follow instructions and align with human preferences. Model scale (parameters, training data, compute) has historically correlated with improved capability, following empirically observed scaling laws, though data quality and training technique also matter significantly.
+
+Prompt Engineering
+Zero-shot prompting asks a model to perform a task with no examples; few-shot prompting provides examples in-context to guide output format and style. Chain-of-thought prompting asks the model to reason step-by-step before answering, often improving performance on multi-step reasoning tasks. System prompts set persistent behavior/persona/constraints for a conversation. Prompt engineering also includes structuring output format (e.g., requesting JSON), specifying constraints, and providing relevant context to reduce hallucination.
+
+Retrieval-Augmented Generation (RAG)
+RAG grounds LLM outputs in external knowledge retrieved at query time rather than relying solely on parametric knowledge learned during training. A typical RAG pipeline: (1) split documents into chunks, (2) embed chunks into dense vectors using an embedding model (e.g., Sentence-Transformers), (3) store vectors in a vector database or index (e.g., FAISS, Pinecone, Chroma), (4) at query time, embed the user's query and retrieve the top-k most similar chunks (commonly via cosine similarity or inner product), and (5) inject retrieved chunks into the prompt as context for the LLM to generate a grounded answer. RAG reduces hallucination and allows using up-to-date or domain-specific knowledge without retraining the model, but retrieval quality (chunking strategy, embedding model, and top-k) directly bounds the quality of the final answer — irrelevant or missing context can still lead to poor or incomplete answers.
+
+Embeddings and Vector Search
+An embedding maps text (or other data) into a dense numeric vector such that semantically similar inputs are close together in vector space. Similarity is commonly measured with cosine similarity or dot product. Approximate Nearest Neighbor (ANN) search algorithms (e.g., HNSW, IVF, used by FAISS) trade a small amount of accuracy for large gains in search speed over massive vector collections, compared to brute-force exact search.
+
+Fine-tuning vs Prompting vs RAG
+Full fine-tuning updates all model weights on task-specific data, typically most effective but expensive and risks catastrophic forgetting. Parameter-efficient fine-tuning (e.g., LoRA) updates a small number of additional parameters, reducing cost. Prompting/in-context learning requires no weight updates and is fastest to iterate on. RAG is preferred when the need is to inject external or frequently changing knowledge rather than to change the model's general behavior or style; the three approaches are often combined in production systems.
+
+Hallucination and Evaluation
+Hallucination refers to an LLM generating plausible-sounding but factually incorrect or unsupported content. Grounding techniques (RAG, citations, requiring the model to quote sources) mitigate but do not eliminate hallucination. Evaluating generative outputs is harder than evaluating classification; approaches include human evaluation, LLM-as-a-judge (using another LLM to score outputs against a rubric), and reference-based metrics (BLEU, ROUGE) which correlate imperfectly with true quality for open-ended generation.
+
+Multimodal Models
+Multimodal models process and/or generate more than one modality (text, images, audio, video). Vision-language models align image and text embeddings in a shared space (e.g., CLIP-style contrastive training) or feed image patch embeddings directly into a transformer alongside text tokens, enabling tasks like image captioning, visual question answering, and document understanding.

@@ -1,0 +1,25 @@
+DATA ENGINEERING - INTERVIEW KNOWLEDGE BASE
+
+ETL vs ELT
+ETL (Extract, Transform, Load) transforms data before loading it into the target system, historically used with limited-compute warehouses. ELT (Extract, Load, Transform) loads raw data first and transforms it inside a powerful modern warehouse (e.g., Snowflake, BigQuery, Redshift) using SQL or engines like dbt, which is now the more common pattern for cloud-native pipelines.
+
+Batch vs Stream Processing
+Batch processing (Apache Spark, Hadoop MapReduce) processes large fixed datasets on a schedule, favoring throughput over latency. Stream processing (Apache Kafka, Apache Flink, Spark Structured Streaming) processes unbounded data continuously with low latency, used for real-time analytics, fraud detection, and monitoring. Lambda architecture combines batch and streaming layers for both accuracy and low latency; Kappa architecture simplifies this by treating everything as a stream.
+
+Data Warehousing Concepts
+A star schema organizes data into a central fact table (measurable events, e.g., sales) connected to dimension tables (descriptive attributes, e.g., customer, product, date), optimized for analytical queries. A snowflake schema further normalizes dimension tables. Slowly Changing Dimensions (SCD) handle changes in dimension data over time: Type 1 overwrites old values, Type 2 preserves history with new rows and effective-date columns, Type 3 keeps limited history in additional columns.
+
+Data Pipelines and Orchestration
+Pipeline orchestration tools like Apache Airflow, Prefect, and Dagster schedule and monitor DAGs (Directed Acyclic Graphs) of tasks, handle retries, and manage dependencies. Idempotency (running a pipeline multiple times produces the same result) is a critical property to avoid duplicate or corrupted data on reruns. Data quality checks (schema validation, null checks, referential integrity, anomaly detection) should be embedded in pipelines, not treated as an afterthought.
+
+Data Lakes vs Data Warehouses vs Lakehouses
+A data lake (e.g., on S3, ADLS) stores raw structured, semi-structured, and unstructured data cheaply at scale, but requires strong metadata/catalog management to avoid becoming a "data swamp." A data warehouse stores structured, curated, schema-enforced data optimized for BI/analytics. A data lakehouse (e.g., Delta Lake, Apache Iceberg, Apache Hudi) combines lake storage economics with warehouse-like ACID transactions, schema enforcement, and time travel.
+
+Distributed Systems Fundamentals
+Partitioning/sharding splits data across nodes for horizontal scalability. Replication improves fault tolerance and read throughput but introduces consistency tradeoffs, captured by the CAP theorem (a distributed system can only guarantee two of Consistency, Availability, and Partition tolerance during a network partition). Data engineers must understand shuffle costs in distributed compute (e.g., Spark joins/groupBy operations that require moving data across the network) since these are often the main performance bottleneck.
+
+File Formats and Storage
+Columnar formats (Parquet, ORC) are efficient for analytical (OLAP) workloads because they read only needed columns and compress well due to similar data types being stored together. Row-based formats (Avro, CSV, JSON) suit transactional (OLTP) or record-by-record processing. Partitioning data on disk (e.g., by date) allows query engines to skip irrelevant files (partition pruning), significantly improving query performance.
+
+Common Interview Topics
+Designing a pipeline to ingest, clean, and aggregate data at scale; handling schema evolution; deduplicating records; backfilling historical data; monitoring pipeline SLAs and data freshness; and tradeoffs between normalization (write efficiency, consistency) and denormalization (read efficiency) in analytical contexts.

@@ -1,0 +1,28 @@
+PYTHON PROGRAMMING - INTERVIEW KNOWLEDGE BASE
+
+Data Types and Structures
+Python has built-in data types: int, float, complex, str, bool, list, tuple, set, frozenset, dict, and NoneType. Lists are mutable ordered sequences created with square brackets. Tuples are immutable ordered sequences, useful for fixed collections and as dictionary keys when they contain only hashable elements. Sets store unique unordered elements and support fast membership testing using hash tables, with average O(1) lookup. Dictionaries store key-value pairs and, since Python 3.7, preserve insertion order as an implementation detail that became a language guarantee in 3.7+.
+
+Mutability and Memory
+Mutable objects (list, dict, set, custom objects) can be changed in place; immutable objects (int, float, str, tuple, frozenset) cannot. Python uses reference counting plus a generational garbage collector to reclaim memory from objects with circular references. Everything in Python is an object, including functions and classes, which enables first-class functions and dynamic typing.
+
+Functions and Scope
+Python resolves names using the LEGB rule: Local, Enclosing, Global, Built-in. The `global` and `nonlocal` keywords let a function modify variables outside its local scope. Default mutable arguments (e.g., def f(x=[])) are a common bug because the default object is created once, not on every call. Closures capture variables from an enclosing scope; decorators are functions that wrap other functions to add behavior without modifying their source, commonly implemented with *args, **kwargs and functools.wraps to preserve metadata.
+
+Object-Oriented Programming
+Python supports classes, single and multiple inheritance, and duck typing. The Method Resolution Order (MRO) for multiple inheritance is computed using the C3 linearization algorithm, viewable via ClassName.__mro__. Special (dunder) methods like __init__, __str__, __repr__, __eq__, __lt__, and __len__ let custom classes integrate with built-in operators and functions. @staticmethod defines a method that does not receive an implicit first argument; @classmethod receives the class (cls) rather than the instance (self); @property exposes a method as a read-only attribute.
+
+Iterators, Generators, and Comprehensions
+An iterable implements __iter__; an iterator implements __iter__ and __next__ and raises StopIteration when exhausted. Generators, created with functions containing `yield` or with generator expressions, produce values lazily and are memory-efficient for large or infinite sequences. List, set, and dict comprehensions provide concise, often faster syntax than explicit loops for building collections.
+
+Concurrency
+The Global Interpreter Lock (GIL) in CPython allows only one thread to execute Python bytecode at a time, which limits the benefit of threading for CPU-bound tasks but not for I/O-bound tasks (where threads release the GIL during I/O waits). The multiprocessing module works around the GIL by using separate processes, each with its own interpreter and memory space, suited for CPU-bound parallelism. asyncio provides single-threaded cooperative concurrency using an event loop, coroutines defined with async def, and the await keyword, best suited for I/O-bound workloads with many concurrent connections.
+
+Error Handling
+Python uses try/except/else/finally blocks. Custom exceptions should subclass Exception (not BaseException directly, which is reserved for system-exiting exceptions like SystemExit and KeyboardInterrupt). The `with` statement and context managers (objects implementing __enter__ and __exit__, or generator functions decorated with @contextlib.contextmanager) ensure resources like files and locks are released even if an exception occurs.
+
+Performance Considerations
+Common performance techniques include using built-in functions and the standard library (implemented in C), avoiding unnecessary object creation in loops, using generators to reduce memory footprint, and profiling with cProfile before optimizing. For numerical work, NumPy arrays are far more memory- and CPU-efficient than native Python lists because they store homogeneous data in contiguous memory and use vectorized C operations.
+
+Common Interview Pitfalls
+Confusing "is" (identity) with "==" (equality); misunderstanding shallow vs. deep copy (copy.copy vs copy.deepcopy); mutable default arguments; misuse of global state; not understanding that Python passes references by value ("pass by object reference"), so reassigning a parameter inside a function does not affect the caller's variable, but mutating a mutable object does.

@@ -1,0 +1,28 @@
+CLOUD COMPUTING - INTERVIEW KNOWLEDGE BASE
+
+Service Models
+IaaS (Infrastructure as a Service, e.g., AWS EC2, Azure VMs) provides raw compute, storage, and networking, giving maximum control but requiring the user to manage the OS and runtime. PaaS (Platform as a Service, e.g., AWS Elastic Beanstalk, Google App Engine, Heroku) abstracts infrastructure management, letting developers focus on code. SaaS (Software as a Service, e.g., Gmail, Salesforce) delivers a complete application over the internet with no infrastructure or platform management by the user.
+
+Core Cloud Concepts
+Elasticity is the ability to automatically scale resources up or down based on demand, controlled via auto-scaling groups/policies. High availability is achieved through redundancy across multiple availability zones/regions, load balancing, and failover mechanisms. The shared responsibility model divides security duties between the cloud provider (security "of" the cloud: physical infrastructure, hypervisor) and the customer (security "in" the cloud: data, identity/access management, network configuration, patching guest OS in IaaS).
+
+Compute Services
+Virtual machines provide traditional compute with full OS control. Containers (Docker) package an application with its dependencies for consistent execution across environments, more lightweight than VMs since they share the host OS kernel. Container orchestration (Kubernetes) automates deployment, scaling, self-healing, and networking of containerized applications across a cluster. Serverless computing (AWS Lambda, Azure Functions, Google Cloud Functions) runs code in response to events without provisioning or managing servers, billed by execution time/invocations, well suited to event-driven and bursty workloads but subject to cold starts and execution time limits.
+
+Storage Services
+Object storage (AWS S3, Azure Blob Storage, GCS) stores unstructured data as objects with metadata, accessed via HTTP APIs, highly durable and scalable but with higher latency than block storage. Block storage (AWS EBS) attaches to a single VM like a traditional hard disk, suited for databases and low-latency workloads. File storage (AWS EFS, Azure Files) provides a shared file system accessible by multiple instances concurrently.
+
+Networking Basics
+A Virtual Private Cloud (VPC) is an isolated virtual network within a cloud provider where resources are deployed, with subnets, route tables, and security groups/network ACLs controlling traffic. A Content Delivery Network (CDN) caches content at edge locations geographically closer to users, reducing latency. Load balancers (Layer 4/network or Layer 7/application) distribute incoming traffic across multiple backend instances for scalability and fault tolerance.
+
+Cloud Databases
+Managed relational databases (AWS RDS, Azure SQL Database, Cloud SQL) handle patching, backups, and replication automatically. NoSQL managed services (DynamoDB, Cosmos DB, Firestore) offer horizontal scalability with flexible schemas. Data warehousing services (BigQuery, Redshift, Snowflake) are optimized for large-scale analytical (OLAP) queries using columnar storage and massively parallel processing.
+
+Security and Identity
+Identity and Access Management (IAM) controls who (users, roles, service accounts) can perform which actions on which resources, following the principle of least privilege. Encryption at rest protects stored data; encryption in transit (TLS) protects data moving across networks. Secrets (API keys, passwords) should be stored in dedicated secret managers (AWS Secrets Manager, Azure Key Vault) rather than hard-coded in source code or config files.
+
+Cost and Architecture Considerations
+Cloud costs are usage-based (pay-as-you-go), making cost optimization (right-sizing instances, reserved/spot instances, storage tiering, turning off unused resources) an ongoing engineering concern rather than a one-time decision. Well-architected frameworks commonly evaluate systems across pillars such as operational excellence, security, reliability, performance efficiency, and cost optimization.
+
+Common Interview Topics
+Explaining when to use serverless vs. containers vs. VMs, designing a highly available multi-region architecture, explaining the shared responsibility model, and discussing tradeoffs between managed services (less operational burden, less control) and self-managed infrastructure (more control, more operational overhead).

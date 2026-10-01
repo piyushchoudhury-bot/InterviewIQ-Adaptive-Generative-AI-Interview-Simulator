@@ -1,0 +1,25 @@
+SQL AND DATABASES - INTERVIEW KNOWLEDGE BASE
+
+Core Query Concepts
+SQL (Structured Query Language) is used to define, query, and manipulate relational data. The logical order of execution of a SELECT statement is: FROM, JOIN, WHERE, GROUP BY, HAVING, SELECT, DISTINCT, ORDER BY, LIMIT — which differs from the written order and explains why column aliases defined in SELECT cannot be used in WHERE but can be used in ORDER BY.
+
+Joins
+INNER JOIN returns rows with matching keys in both tables. LEFT JOIN (LEFT OUTER JOIN) returns all rows from the left table and matched rows from the right, with NULLs where there is no match. RIGHT JOIN is the mirror image, and FULL OUTER JOIN returns all rows from both tables, matched where possible. A CROSS JOIN produces the Cartesian product of two tables. Self-joins join a table to itself, often used for hierarchical data such as employee-manager relationships.
+
+Aggregation and Grouping
+GROUP BY groups rows sharing values in specified columns so aggregate functions (COUNT, SUM, AVG, MIN, MAX) can be applied per group. HAVING filters groups after aggregation, while WHERE filters rows before aggregation. Window functions (OVER clause) such as ROW_NUMBER(), RANK(), DENSE_RANK(), LAG(), LEAD(), and running SUM()/AVG() OVER (PARTITION BY ... ORDER BY ...) compute values across a set of rows related to the current row without collapsing them into groups, unlike GROUP BY.
+
+Keys and Normalization
+A primary key uniquely identifies each row and cannot contain NULLs. A foreign key enforces referential integrity by referencing a primary key in another table. Normalization (1NF, 2NF, 3NF, BCNF) reduces data redundancy and update anomalies by organizing columns and tables based on functional dependencies. Denormalization intentionally introduces redundancy to improve read performance in analytical workloads, trading off write complexity and storage.
+
+Indexing and Performance
+An index (commonly a B-tree) speeds up lookups and range queries at the cost of additional storage and slower writes, since indexes must be updated on INSERT/UPDATE/DELETE. Composite indexes are most effective when queries filter on a leading prefix of the indexed columns. EXPLAIN / EXPLAIN ANALYZE shows the query planner's execution plan, useful for spotting full table scans, missing indexes, or expensive joins. Covering indexes include all columns a query needs, allowing an index-only scan.
+
+Transactions and ACID
+A transaction is a unit of work that is Atomic, Consistent, Isolated, and Durable (ACID). Isolation levels (Read Uncommitted, Read Committed, Repeatable Read, Serializable) trade off consistency guarantees against concurrency, controlling phenomena such as dirty reads, non-repeatable reads, and phantom reads. Locks or multi-version concurrency control (MVCC) are used to implement isolation.
+
+SQL vs NoSQL
+Relational databases enforce a fixed schema and strong consistency, suited to structured, relational data with complex queries and joins. NoSQL databases (document stores like MongoDB, key-value stores like Redis, wide-column stores like Cassandra, graph databases like Neo4j) trade some consistency or query flexibility for horizontal scalability and flexible schemas, often following eventual consistency models in distributed setups.
+
+Common Interview Topics
+Writing queries to find duplicates (GROUP BY with HAVING COUNT(*) > 1), the second-highest value (subquery, OFFSET/LIMIT, or window functions), running totals (SUM OVER), and pivoting data (CASE WHEN combined with aggregation, or database-specific PIVOT syntax). Understanding the difference between UNION (removes duplicates) and UNION ALL (keeps duplicates, faster) is a frequent question, as is the difference between DELETE (row-by-row, logged, can be rolled back, triggers fire), TRUNCATE (deallocates pages, minimal logging, resets identity, cannot usually be rolled back in all engines), and DROP (removes the table definition entirely).

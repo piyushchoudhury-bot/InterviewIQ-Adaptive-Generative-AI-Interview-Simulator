@@ -1,0 +1,25 @@
+STATISTICS AND PROBABILITY - INTERVIEW KNOWLEDGE BASE
+
+Descriptive Statistics
+Mean, median, and mode summarize central tendency; the median is robust to outliers while the mean is not. Variance and standard deviation measure spread; standard deviation is in the same units as the data. Skewness measures asymmetry of a distribution; kurtosis measures tail heaviness. The Interquartile Range (IQR = Q3 - Q1) is used to detect outliers (commonly, values beyond 1.5*IQR from Q1/Q3).
+
+Probability Distributions
+The normal (Gaussian) distribution is symmetric and bell-shaped, fully described by mean and variance; the Central Limit Theorem states that the sampling distribution of the mean of sufficiently large independent samples approaches normality regardless of the population's original distribution. The binomial distribution models the number of successes in n independent Bernoulli trials. The Poisson distribution models the count of events in a fixed interval given a constant average rate, useful for rare-event modeling. The exponential distribution models time between events in a Poisson process.
+
+Hypothesis Testing
+A hypothesis test evaluates a null hypothesis (H0, typically "no effect") against an alternative (H1) using a test statistic and p-value. The p-value is the probability of observing data at least as extreme as what was seen, assuming H0 is true — it is NOT the probability that H0 is true. A significance level (commonly alpha = 0.05) sets the threshold for rejecting H0. Type I error (false positive) rejects a true H0; Type II error (false negative) fails to reject a false H0. Statistical power is the probability of correctly rejecting a false H0, increased by larger sample sizes and effect sizes.
+
+Common Tests
+A t-test compares means of one or two groups (independent or paired) when the population variance is unknown, estimated from the sample. ANOVA (Analysis of Variance) compares means across three or more groups. A chi-square test assesses independence between categorical variables or goodness of fit. Correlation (Pearson for linear relationships, Spearman for monotonic/ranked relationships) measures association strength between -1 and 1, but correlation does not imply causation — confounding variables can produce spurious correlations.
+
+Confidence Intervals
+A confidence interval gives a range of plausible values for a population parameter with a stated confidence level (e.g., 95%), meaning that if the sampling process were repeated many times, about 95% of such intervals would contain the true parameter — it does NOT mean there is a 95% probability the true value lies in this specific interval.
+
+Regression and Correlation in Practice
+Multicollinearity (highly correlated predictors) inflates the variance of regression coefficients and can be diagnosed via the Variance Inflation Factor (VIF). Heteroscedasticity (non-constant variance of residuals) violates a linear regression assumption and can bias standard error estimates, sometimes addressed with weighted least squares or robust standard errors. R-squared measures the proportion of variance in the dependent variable explained by predictors, but adding predictors never decreases R-squared, so adjusted R-squared is used to penalize unnecessary complexity.
+
+Bayesian vs Frequentist Thinking
+Frequentist statistics treats parameters as fixed unknowns and probability as long-run frequency; Bayesian statistics treats parameters as random variables with a prior distribution, updated to a posterior distribution using observed data via Bayes' theorem (posterior proportional to likelihood times prior). Bayesian methods naturally incorporate prior knowledge and yield direct probability statements about parameters, at the cost of requiring a (sometimes subjective) prior.
+
+Common Interview Topics
+Explaining p-values and confidence intervals in plain language, designing an A/B test (including sample size/power calculation and avoiding peeking/multiple-testing issues), diagnosing and correcting for outliers or skewed distributions, and choosing the appropriate statistical test given data type (continuous vs categorical) and number of groups being compared.

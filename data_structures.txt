@@ -1,0 +1,25 @@
+DATA STRUCTURES AND ALGORITHMS - INTERVIEW KNOWLEDGE BASE
+
+Arrays and Strings
+Arrays provide O(1) random access but O(n) insertion/deletion in the middle since elements must shift. Dynamic arrays (Python lists, Java ArrayList) amortize resizing cost to O(1) average append. Common string techniques include two-pointer scanning, sliding windows for substring problems, and hashing for anagram/duplicate detection.
+
+Linked Lists
+Singly linked lists allow O(1) insertion/deletion at a known node but O(n) access by index. Doubly linked lists add a previous pointer, enabling O(1) removal given a node reference. Common problems include reversing a list, detecting cycles (Floyd's tortoise and hare, using slow/fast pointers), and merging sorted lists.
+
+Stacks and Queues
+A stack is LIFO (Last In, First Out), used for function call stacks, undo operations, and balanced-parentheses checking. A queue is FIFO (First In, First Out), used for BFS and task scheduling. A deque supports insertion/removal at both ends. Two stacks can implement a queue and vice versa; a monotonic stack is used for problems like "next greater element."
+
+Trees
+A binary tree has at most two children per node. A binary search tree (BST) maintains the invariant that left descendants are smaller and right descendants are larger, giving O(log n) average search/insert/delete but O(n) worst case if unbalanced. Self-balancing trees (AVL, Red-Black) maintain O(log n) worst-case height through rotations. Tree traversals include pre-order, in-order (yields sorted order for a BST), post-order, and level-order (BFS with a queue). Tries (prefix trees) efficiently store and query strings by shared prefixes, commonly used in autocomplete. Heaps (binary min-heap/max-heap) provide O(log n) insertion and O(1) access to the min/max element, and are the basis of priority queues and heap sort.
+
+Hash Tables
+Hash tables map keys to values using a hash function, giving average O(1) lookup, insertion, and deletion. Collisions are resolved via chaining (linked lists/buckets) or open addressing (linear/quadratic probing, double hashing). A good hash function distributes keys uniformly; load factor (n/capacity) affects performance and triggers resizing.
+
+Graphs
+Graphs can be directed or undirected, weighted or unweighted, represented as adjacency lists (space-efficient for sparse graphs) or adjacency matrices (O(1) edge lookup, O(V^2) space). Breadth-First Search (BFS) finds shortest paths in unweighted graphs; Depth-First Search (DFS) is used for cycle detection, topological sorting, and connected components. Dijkstra's algorithm finds shortest paths in graphs with non-negative weights using a priority queue; Bellman-Ford handles negative weights and detects negative cycles. Union-Find (Disjoint Set Union) efficiently tracks connected components, used in Kruskal's minimum spanning tree algorithm.
+
+Sorting and Complexity
+Comparison-based sorts have a lower bound of O(n log n); merge sort and heap sort guarantee this in the worst case, while quicksort averages O(n log n) but degrades to O(n^2) worst case without good pivot selection. Non-comparison sorts like counting sort and radix sort can achieve O(n+k) under specific constraints on input range. Big-O notation describes the upper bound on growth rate of time or space as input size grows, distinct from Big-Omega (lower bound) and Big-Theta (tight bound).
+
+Problem-Solving Patterns
+Common interview patterns include two pointers, sliding window, fast/slow pointers, binary search on sorted or monotonic search spaces, backtracking (with pruning) for combinatorial search, dynamic programming (identifying overlapping subproblems and optimal substructure, using memoization or tabulation), and greedy algorithms (choosing the locally optimal option, valid only when the problem exhibits the greedy-choice property).

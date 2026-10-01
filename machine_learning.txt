@@ -1,0 +1,22 @@
+MACHINE LEARNING - INTERVIEW KNOWLEDGE BASE
+
+Supervised vs Unsupervised vs Reinforcement Learning
+Supervised learning trains models on labeled input-output pairs (e.g., regression, classification). Unsupervised learning finds structure in unlabeled data (e.g., clustering with k-means/DBSCAN, dimensionality reduction with PCA/t-SNE). Reinforcement learning trains an agent to take actions in an environment to maximize cumulative reward, using concepts like states, actions, policies, and value functions.
+
+Bias-Variance Tradeoff
+High-bias models (e.g., linear regression on nonlinear data) underfit, showing high training and test error. High-variance models (e.g., deep decision trees) overfit, showing low training error but high test error. Total expected error decomposes into bias^2 + variance + irreducible noise. Regularization (L1/Lasso, L2/Ridge, elastic net), cross-validation, pruning, dropout, and early stopping are standard techniques to control this tradeoff.
+
+Model Evaluation Metrics
+For classification: accuracy, precision (TP/(TP+FP)), recall/sensitivity (TP/(TP+FN)), F1-score (harmonic mean of precision and recall), ROC-AUC, and confusion matrices. Accuracy is misleading on imbalanced datasets, where precision/recall/F1 or PR-AUC are more informative. For regression: Mean Squared Error (MSE), Root MSE, Mean Absolute Error (MAE), and R-squared (proportion of variance explained). Cross-validation (typically k-fold) estimates generalization performance more robustly than a single train/test split.
+
+Common Algorithms
+Linear regression models a continuous target as a weighted sum of features, fit by minimizing squared error (often via gradient descent or closed-form normal equations). Logistic regression models the log-odds of a binary outcome using the sigmoid function, and is a classification, not regression, algorithm despite its name. Decision trees split data recursively on feature thresholds to minimize impurity (Gini index or entropy/information gain). Random forests are ensembles of decision trees trained on bootstrapped samples with random feature subsets (bagging), reducing variance. Gradient boosting (e.g., XGBoost, LightGBM) builds trees sequentially, each correcting the residual errors of the previous ensemble. Support Vector Machines find the maximum-margin hyperplane separating classes, using kernels (linear, RBF, polynomial) to handle non-linear boundaries. k-Nearest Neighbors classifies a point by majority vote of its k closest training points, requiring no explicit training phase but being expensive at inference time.
+
+Feature Engineering and Preprocessing
+Techniques include handling missing values (imputation, deletion), encoding categorical variables (one-hot, label, target encoding), scaling numeric features (standardization/z-score, min-max normalization) — important for distance-based and gradient-based algorithms but not for tree-based ones — and handling class imbalance (SMOTE oversampling, class weighting, undersampling).
+
+Neural Networks and Deep Learning Basics
+A neural network consists of layers of neurons applying weighted sums followed by nonlinear activation functions (ReLU, sigmoid, tanh, softmax for multi-class output). Training uses backpropagation to compute gradients of a loss function with respect to weights, updated via gradient descent variants (SGD, Adam, RMSprop). Overfitting in deep networks is mitigated with dropout, batch normalization, weight decay, and data augmentation. Convolutional Neural Networks (CNNs) exploit spatial locality for image data; Recurrent Neural Networks (RNNs), LSTMs, and GRUs handle sequential data; Transformers use self-attention to model relationships across a sequence in parallel, forming the basis of modern large language models.
+
+Model Selection and Deployment
+Hyperparameter tuning uses grid search, random search, or Bayesian optimization, validated with a held-out validation set or cross-validation, never the final test set. Concept drift and data drift can degrade a deployed model's performance over time, requiring monitoring and periodic retraining. Explainability tools such as SHAP and LIME help interpret model predictions, particularly important for high-stakes or regulated applications.
